@@ -53,6 +53,8 @@ This library is essentially a simple to use wrapper around the mailgun API.
 
 Currently, the library only supports sending emails via the API, but more features will be coming soon.
 
+
+
 Example
 -------
 
