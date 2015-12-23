@@ -1,4 +1,6 @@
-# Mailgun Java Client Library
+[![Build Status](https://travis-ci.org/blairmotchan/mailgun.svg?branch=master)](https://travis-ci.org/blairmotchan/mailgun)
+
+# Mailgun Java Client Library 
 
 Mailgun is an awesome email API.  It supports SMTP and API sending, although this library only currently supports the API.
 

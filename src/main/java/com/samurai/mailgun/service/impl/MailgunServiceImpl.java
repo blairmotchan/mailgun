@@ -21,7 +21,6 @@ import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.StringJoiner;
 
 public class MailgunServiceImpl implements MailgunService {
 
@@ -154,13 +153,14 @@ public class MailgunServiceImpl implements MailgunService {
     }
 
     private String getJoinedString(List<String> list) {
-        StringJoiner joiner = new StringJoiner(", ");
+        StringBuilder sb = new StringBuilder("");
 
-        for (String item : list) {
-            joiner.add(item);
+        for (int i = 0; i < list.size(); i++) {
+            sb.append(list.get(i));
+            if (i != list.size() - 1) sb.append(", ");
         }
 
-        return joiner.toString();
+        return sb.toString();
     }
 
     private void setBooleanValue(Form form, String key, boolean value) {
