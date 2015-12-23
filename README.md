@@ -9,7 +9,7 @@ You can sign up for an account at https://mailgun.com/signup
 Requirements
 ------------
 
-Java 1.7 and later
+Java 1.8
 
 Installation
 ------------
