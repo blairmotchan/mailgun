@@ -17,7 +17,7 @@ import javax.ws.rs.core.Form;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +36,7 @@ public class MailgunServiceImpl implements MailgunService {
 
     private String baseUrl;
 
-    private static final SimpleDateFormat SDF = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z");
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("EEE, dd MMM yyyy HH:mm:ss z");
 
     @Override
     public MessageResponse sendEmail(Message message) {
@@ -93,7 +93,7 @@ public class MailgunServiceImpl implements MailgunService {
             messageData.param("o:campaign", message.getCampaign());
 
         if (message.getDeliveryTime() != null)
-            messageData.param("o:deliverytime", SDF.format(message.getDeliveryTime()));
+            messageData.param("o:deliverytime", message.getDeliveryTime().format(FORMATTER));
 
 
         Response response = sendMessage(messageData);

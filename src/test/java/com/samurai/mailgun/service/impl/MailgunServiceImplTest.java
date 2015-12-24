@@ -15,6 +15,8 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import javax.ws.rs.core.Form;
 import javax.ws.rs.core.Response;
 import java.lang.reflect.InvocationTargetException;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.Map;
@@ -86,6 +88,7 @@ public class MailgunServiceImplTest {
                 .setFrom("from@email.com");
 
         if (allOptions) {
+
             Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("CST"));
             cal.set(2000, 1, 1, 1, 1, 1);
             return message
@@ -102,7 +105,7 @@ public class MailgunServiceImplTest {
                     .addHeader("header", "value")
                     .addTag("tag1")
                     .setCampaign("campaign")
-                    .setDeliveryTime(cal.getTime())
+                    .setDeliveryTime(ZonedDateTime.of(2015, 1, 1, 0, 0, 0, 0, ZoneId.of("America/Chicago")))
                     .addVariable("variable", "value");
         } else {
             return message;
@@ -131,7 +134,7 @@ public class MailgunServiceImplTest {
             assertThat(((LinkedList<String>) formMap.get("o:tag")).get(0), is("tag1"));
             assertThat(((LinkedList<String>) formMap.get("o:campaign")).get(0), is("campaign"));
             assertThat(((LinkedList<String>) formMap.get("o:tag")).get(0), is("tag1"));
-            assertThat(((LinkedList<String>) formMap.get("o:deliverytime")).get(0), is("Tue, 01 Feb 2000 01:01:01 CST"));
+            assertThat(((LinkedList<String>) formMap.get("o:deliverytime")).get(0), is("Thu, 01 Jan 2015 00:00:00 CST"));
         } else {
             assertThat(formMap.size(), is(2));
         }
@@ -202,17 +205,4 @@ public class MailgunServiceImplTest {
     public void unknownException() throws Exception {
         testException(600, "600 Unknown Error");
     }
-
-//    @Test
-//    public void testStuff() {
-//        MailgunServiceImpl service = new MailgunServiceImpl("key-082778aba9d4181e0e3af6af4ed2ba47", "https://api.mailgun.net/v3/sandbox1df6c1cd74f04b3aa5f7d05c716a0c8f.mailgun.org/messages");
-//
-//        Message message = new Message();
-//        message.addTo("blair.motchan@gmail.com")
-//                .setFrom("blair@samurai.software")
-//                .setText("foobizzar")
-//                .setSubject("mailgun test");
-//
-//        service.sendEmail(message);
-//    }
 }

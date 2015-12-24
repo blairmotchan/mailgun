@@ -2,6 +2,7 @@ package com.samurai.mailgun.builder;
 
 import org.apache.commons.lang.StringUtils;
 
+import java.time.ZonedDateTime;
 import java.util.*;
 
 public class Message {
@@ -48,7 +49,7 @@ public class Message {
     private Tracking tracking;
     private TrackingClicks trackingClicks;
     private TrackingOpens trackingOpens;
-    private Date deliveryTime;
+    private ZonedDateTime deliveryTime;
 
 
     public Message addTo(String... to) {
@@ -228,11 +229,11 @@ public class Message {
         return this;
     }
 
-    public Date getDeliveryTime() {
+    public ZonedDateTime getDeliveryTime() {
         return deliveryTime;
     }
 
-    public Message setDeliveryTime(Date deliveryTime) {
+    public Message setDeliveryTime(ZonedDateTime deliveryTime) {
         this.deliveryTime = deliveryTime;
         return this;
     }
